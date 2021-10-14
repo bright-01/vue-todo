@@ -1,6 +1,7 @@
 <template>
   <div>
-    <ul>
+<!--    transition을 사용하게 되면 name에 해당 태그의 클래스. tag에 태그 이름을 넣는다-->
+    <transition-group name="list" tag="ul">
       <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
         <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.item}"
            v-on:click="toggleComplete(todoItem, index)"></i>
@@ -9,7 +10,7 @@
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -79,4 +80,5 @@ li {
   opacity: 0;
   transform: translateY(30px);
 }
+
 </style>
