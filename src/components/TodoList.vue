@@ -17,7 +17,7 @@
 <script>
 export default {
   name: "TodoList",
-  data: function(){
+  data(){
     return {
     }
   },
@@ -25,12 +25,12 @@ export default {
     propsdata : Array
   },
   methods:{
-    removeTodo: function(todoItem, index){
+    removeTodo(todoItem, index){
       this.$emit("removeTodoItem", todoItem, index);
       // localStorage.removeItem(todoItem);
       // this.todoItems.splice(index,1);
     },
-    toggleComplete: function(todoItem, index){
+    toggleComplete(todoItem, index){
       console.log(todoItem, index);
       this.$emit('toggleItem', todoItem, index);
     }

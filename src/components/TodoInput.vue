@@ -29,14 +29,14 @@ import Modal from './common/Modal';
 
 export default {
   name: "TodoInput",
-  data: function(){
+  data(){
     return {
       newTodoItem : "",
       showModal : false
     }
   },
   methods: {
-    addTodo : function(){
+    addTodo (){
       console.log(this.newTodoItem);
       // 저장하고
       if(this.newTodoItem !== ''){
@@ -46,12 +46,12 @@ export default {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function(){
+    clearInput(){
       this.newTodoItem = "";
     }
   },
   components : {
-    Modal : Modal
+    Modal
   }
 }
 </script>
