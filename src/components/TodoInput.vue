@@ -37,10 +37,10 @@ export default {
   },
   methods: {
     addTodo (){
-      console.log(this.newTodoItem);
       // 저장하고
       if(this.newTodoItem !== ''){
-        this.$emit('addTodoItem', this.newTodoItem);
+        // this.$emit('addTodoItem', this.newTodoItem);
+        this.$store.commit('addOneItem', this.newTodoItem);
         this.clearInput();
       } else {
         this.showModal = !this.showModal;

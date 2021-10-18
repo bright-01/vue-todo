@@ -2,7 +2,7 @@
   <div>
 <!--    transition을 사용하게 되면 name에 해당 태그의 클래스. tag에 태그 이름을 넣는다-->
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
+      <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem" class="shadow">
         <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.item}"
            v-on:click="toggleComplete(todoItem, index)"></i>
          <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
@@ -21,18 +21,22 @@ export default {
     return {
     }
   },
-  props:{
-    propsdata : Array
-  },
   methods:{
     removeTodo(todoItem, index){
-      this.$emit("removeTodoItem", todoItem, index);
-      // localStorage.removeItem(todoItem);
-      // this.todoItems.splice(index,1);
+      let param = {
+        todoItem, index
+      }
+      this.$store.commit("removeOneItem", param)
+      // this.$store.commit("removeOneItem", {todoItem, index})
     },
     toggleComplete(todoItem, index){
-      console.log(todoItem, index);
-      this.$emit('toggleItem', todoItem, index);
+      // this.$emit('toggleItem', todoItem, index);
+      let param = {
+        todoItem, index
+      };
+
+      this.$store.commit("toggleOneItem", param);
+
     }
   }
 }
