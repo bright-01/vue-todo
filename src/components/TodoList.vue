@@ -3,7 +3,7 @@
 <!--    transition을 사용하게 되면 name에 해당 태그의 클래스. tag에 태그 이름을 넣는다-->
     <transition-group name="list" tag="ul">
       <li v-for="(todoItem, index) in getTodoItems" v-bind:key="todoItem" class="shadow">
-        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.item}"
+        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
            v-on:click="toggleOneItem({todoItem, index})"></i>
          <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
          <span class="removeBtn" v-on:click="removeOneItem({todoItem, index})">
@@ -66,14 +66,4 @@ li {
   margin-left: auto;
   color: #de4343;
 }
-/* transition css */
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
 </style>
