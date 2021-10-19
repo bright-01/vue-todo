@@ -2,11 +2,11 @@
   <div>
 <!--    transition을 사용하게 되면 name에 해당 태그의 클래스. tag에 태그 이름을 넣는다-->
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem" class="shadow">
+      <li v-for="(todoItem, index) in getTodoItems" v-bind:key="todoItem" class="shadow">
         <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.item}"
-           v-on:click="toggleComplete(todoItem, index)"></i>
+           v-on:click="toggleOneItem({todoItem, index})"></i>
          <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
-         <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+         <span class="removeBtn" v-on:click="removeOneItem({todoItem, index})">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -15,29 +15,20 @@
 </template>
 
 <script>
+
+import { mapGetters, mapMutations } from 'vuex';
+
 export default {
   name: "TodoList",
   data(){
     return {
     }
   },
+  computed : {
+    ...mapGetters(['getTodoItems'])
+  },
   methods:{
-    removeTodo(todoItem, index){
-      let param = {
-        todoItem, index
-      }
-      this.$store.commit("removeOneItem", param)
-      // this.$store.commit("removeOneItem", {todoItem, index})
-    },
-    toggleComplete(todoItem, index){
-      // this.$emit('toggleItem', todoItem, index);
-      let param = {
-        todoItem, index
-      };
-
-      this.$store.commit("toggleOneItem", param);
-
-    }
+    ...mapMutations(['removeOneItem','toggleOneItem']),
   }
 }
 </script>
