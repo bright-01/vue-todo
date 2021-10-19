@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as getters from "./getters";
+import * as mutations from './mutations';
 
 Vue.use(Vuex) // use는 플러그인 Vue를 사용하는 모든 영역에 Vuex를 사용하겠다라고 명시적으로 추가
 // 위에서 추가하면
@@ -26,35 +28,9 @@ export const store = new Vuex.Store({
         headerText : 'TODO it!!!!',
         todoItems: storage.fetch()
     },
-    getters: {
-        getTodoItems : state => {
-            return state.todoItems;
-        }
-    },
-    mutations: {
-        addOneItem (state, payload) {
-            const obj = { completed: false, item: payload}
-            localStorage.setItem(payload, JSON.stringify(obj))
-            state.todoItems.push(obj);
-        },
-        // removeOneItem(todoItem, index){
-        removeOneItem(state, payload){
-            // localStorage.removeItem(payload.todoItem.item);
-            localStorage.removeItem(payload.todoItem.item);
-            state.todoItems.splice(payload.index,1);
-        },
-        // toggleOneItem(todoItem, index){
-        toggleOneItem(state, payload){
-            state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
-            // todoItem.completed = !todoItem.completed;
-            localStorage.removeItem(payload.todoItem);
-            localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
-        },
-        todoItemAllClear (state){
-            localStorage.clear();
-            state.todoItems = [];
-        }
-    }
+    getters,
+    mutations
+
 })
 
 //state : 여러 컴포넌트에 공유되는 데이터 data
